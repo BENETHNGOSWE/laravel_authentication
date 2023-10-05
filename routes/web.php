@@ -25,13 +25,18 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/register', [AuthController::class,'registerPost'])->name('register');
     Route::get('/login', [AuthController::class,'login'])->name('login');
     Route::post('/login',[AuthController::class,'loginPost'])->name('login');
+
+
+    Route::get('/', [HomeController::class,'homepage'])->name('homepage.homepage');
     
 });
 
 
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/home', [HomeController::class,'index']);
+    Route::get('/home', [HomeController::class,'index'])->name('index');
+    Route::get('/create', [HomeController::class, 'create'])->name('createproject.create');
+    Route::post('/store', [HomeController::class, 'store'])->name('createproject.store');
     Route::delete('/logout', [AuthController::class,'logout'])->name('logout');
 });
 
